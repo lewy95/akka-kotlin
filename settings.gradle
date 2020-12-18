@@ -1,0 +1,6 @@
+// 配置父子依赖关系
+rootProject.name = 'akka-kotlin'
+include('akka-typed',
+        'akka-classic'
+)
+
