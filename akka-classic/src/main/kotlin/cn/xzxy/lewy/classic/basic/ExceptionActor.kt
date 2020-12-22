@@ -1,6 +1,8 @@
 package cn.xzxy.lewy.classic.basic
 
+
 import akka.actor.*
+import akka.actor.SupervisorStrategy.*
 import akka.japi.pf.ReceiveBuilder
 import scala.concurrent.duration.Duration
 import java.util.*
@@ -42,10 +44,10 @@ fun main(args: Array<String>) {
         // 异常处理策略
         override fun supervisorStrategy() = AllForOneStrategy(-1, Duration.Inf()) {
             when (it) {
-                is ActorInitializationException -> SupervisorStrategy.stop()
-                is ActorKilledException -> SupervisorStrategy.stop()
-                is DeathPactException -> SupervisorStrategy.stop()
-                else -> SupervisorStrategy.restart()
+                is ActorInitializationException -> stop() as Directive?
+                is ActorKilledException -> stop() as Directive?
+                is DeathPactException -> stop() as Directive?
+                else -> restart() as Directive?
             }
         }
 
@@ -75,9 +77,4 @@ fun main(args: Array<String>) {
     actorSystem.actorSelection("akka://exceptionActor/user/parent/child1").tell("DIE", ActorRef.noSender())
 
     actorSystem.terminate()
-
-    // FQA:
-    // 1. 消息处理的顺序？
-    // 2. 异常策略？
-
 }

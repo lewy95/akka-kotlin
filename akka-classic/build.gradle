@@ -1,7 +1,6 @@
 dependencies {
-    compile "com.typesafe.akka:akka-actor_2.13:2.6.1"
-    compile "com.typesafe.akka:akka-slf4j_2.13:2.6.1"
-    compile "com.typesafe.akka:akka-stream_2.13:2.6.1"
-    compile "com.enragedginger:akka-quartz-scheduler_2.13:1.8.2-akka-2.6.x"
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compile("com.typesafe.akka:akka-actor_$scalaBinary:$akkaVersion")
+    compile("com.typesafe.akka:akka-slf4j_$scalaBinary:$akkaVersion")
+    compile("com.typesafe.akka:akka-stream_$scalaBinary:$akkaVersion")
+    compile("com.enragedginger:akka-quartz-scheduler_2.13:1.8.2-akka-2.6.x")
 }
